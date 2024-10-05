@@ -3,7 +3,7 @@ import 'package:weather_forecasting_app/views/password_changed_view.dart';
 import 'package:weather_forecasting_app/widgets/splash_view_body.dart';
 
 class SplashView extends StatefulWidget {
-  const SplashView({Key? key}) : super(key: key);
+  const SplashView({super.key});
 
   @override
   _SplashViewState createState() => _SplashViewState();
@@ -28,7 +28,7 @@ class _SplashViewState extends State<SplashView>
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => PasswordChangedView()), 
+            builder: (context) => const PasswordChangedView()), 
       );
     });
   }
