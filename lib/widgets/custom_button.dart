@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.text});
+  const CustomButton({super.key, required this.text, required this.onTap});
   final String text;
+  final void Function() onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => ),
-        // );
-      },
+      onTap:onTap,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Container(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_forecasting_app/views/password_changed_view.dart';
+import 'package:weather_forecasting_app/views/create_new_password.dart';
 import 'package:weather_forecasting_app/widgets/splash_view_body.dart';
 
 class SplashView extends StatefulWidget {
@@ -27,8 +27,7 @@ class _SplashViewState extends State<SplashView>
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-            builder: (context) => const PasswordChangedView()), 
+        MaterialPageRoute(builder: (context) => const CreateNewPassword()),
       );
     });
   }

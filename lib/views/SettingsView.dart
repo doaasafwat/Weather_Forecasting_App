@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:weather_forecasting_app/widgets/custom_list_tile.dart';
 
-
 class Setting extends StatefulWidget {
   const Setting({super.key});
 
@@ -52,7 +51,7 @@ class _SettingState extends State<Setting> {
                 },
                 tileColor: const Color(0xFF1D2837),
                 title: const Text(
-                  'cellular Data',
+                  'Cellular Data',
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -127,5 +126,3 @@ class _SettingState extends State<Setting> {
     );
   }
 }
-
-
