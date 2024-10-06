@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:weather_forecasting_app/views/splash_view.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class WeatherForeCast extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xff1D2837),
       ),
       home: const Scaffold(
-        body:  SplashView(),
+        body: SplashView(),
       ),
     );
   }

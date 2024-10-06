@@ -110,7 +110,7 @@ class _SettingState extends State<Setting> {
                     resetIdentifier = value;
                   });
                 },
-                tileColor: Color(0xFF1D2837),
+                tileColor: const Color(0xFF1D2837),
                 title: const Text(
                   'Reset Identifier',
                   style: TextStyle(
