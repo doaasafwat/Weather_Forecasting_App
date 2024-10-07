@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecasting_app/views/search_view.dart';
 import 'package:weather_forecasting_app/widgets/custom_button.dart';
 
 class PasswordChangedBody extends StatelessWidget {
@@ -14,7 +15,7 @@ class PasswordChangedBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset('assets/images/Sticker.png'),
-            const SizedBox(height: 100),
+            const SizedBox(height: 60),
             const DefaultTextStyle(
               style: TextStyle(
                   color: Color(0xFFFFFFFF),
@@ -37,8 +38,16 @@ class PasswordChangedBody extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 40),
-            const CustomButton(
+            CustomButton(
               text: 'Okey',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SearchView(),
+                  ),
+                );
+              },
             ),
           ],
         ),

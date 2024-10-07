@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:weather_forecasting_app/widgets/custom_list_tile.dart';
 
-
 class Setting extends StatefulWidget {
   const Setting({super.key});
 
@@ -18,6 +17,7 @@ class _SettingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       backgroundColor: const Color(0xFF1D2837),
       appBar: AppBar(
         centerTitle: true,
         leading: Container(
@@ -25,7 +25,7 @@ class _SettingState extends State<Setting> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8), color: Colors.white),
             child: const BackButton()),
-        backgroundColor: Color(0xFF1D2837),
+        backgroundColor: const Color(0xFF1D2837),
         title: const Text(
           'Settings',
           style: TextStyle(color: Colors.white, fontSize: 25),
@@ -52,7 +52,7 @@ class _SettingState extends State<Setting> {
                 },
                 tileColor: const Color(0xFF1D2837),
                 title: const Text(
-                  'cellular Data',
+                  'Cellular Data',
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -111,7 +111,7 @@ class _SettingState extends State<Setting> {
                     resetIdentifier = value;
                   });
                 },
-                tileColor: Color(0xFF1D2837),
+                tileColor: const Color(0xFF1D2837),
                 title: const Text(
                   'Reset Identifier',
                   style: TextStyle(
@@ -127,5 +127,3 @@ class _SettingState extends State<Setting> {
     );
   }
 }
-
-
