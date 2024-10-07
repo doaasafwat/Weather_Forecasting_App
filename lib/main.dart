@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weather_forecasting_app/views/Notification/notification_view.dart';
 import 'package:weather_forecasting_app/views/splash_view.dart';
 
 void main() {
