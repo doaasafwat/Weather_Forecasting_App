@@ -33,7 +33,7 @@ class HeaderSearchView extends StatelessWidget {
               children: [
                 DefaultTextStyle(
                   style: TextStyle(
-                      color: Color(0xff9F7CFFF),
+                      color: Color(0xff9f7cff),
                       fontSize: 14,
                       fontWeight: FontWeight.w400),
                   child: Text('Hi, WelcomeBack'),
@@ -58,7 +58,7 @@ class HeaderSearchView extends StatelessWidget {
               height: 40,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: Color(0xffCAD6FF),
+                color: const Color(0xffCAD6FF),
               ),
               child: IconButton(
                 onPressed: () {

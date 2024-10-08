@@ -34,7 +34,7 @@ class NotificationView extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SearchView(),
+                    builder: (context) => const SearchView(),
                   ),
                 );
               },

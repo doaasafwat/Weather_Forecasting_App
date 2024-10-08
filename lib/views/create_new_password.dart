@@ -21,9 +21,7 @@ class CreateNewPassword extends StatelessWidget {
         color: const Color(0xff1D2837),
         child: Padding(
           padding: const EdgeInsets.only(top: 50),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
             children: [
               const Padding(
                 padding: EdgeInsets.only(left: 15),
@@ -79,7 +77,6 @@ class CreateNewPassword extends StatelessWidget {
                   );
                 },
               ),
-             
             ],
           ),
         ),

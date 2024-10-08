@@ -9,8 +9,8 @@ class WeatherCard extends StatelessWidget {
       required this.tempRange,
       required this.aqi});
 
-  @override
   final String day, data, condition, tempRange, aqi;
+  @override
   Widget build(BuildContext context) {
     return Container(
       width: 100,
