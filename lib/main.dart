@@ -9,10 +9,10 @@ void main() async {
    Platform.isAndroid
       ? await Firebase.initializeApp(
           options: const FirebaseOptions(
-          apiKey: 'AIzaSyCimcLXU_ljHzhdGmjU1Bg3Ubx6XmUFdWQ',
-          appId: '1:608401309663:android:14872147e884127fa18e6a',
-          messagingSenderId: '608401309663',
-          projectId: 'weatherapp-f74f7',
+          apiKey: 'AIzaSyBF2axobwU3pCHvo10OstvdmtCu-XzI6z8',
+          appId: '1:415694288684:android:7610c894d2516cd7929e89',
+          messagingSenderId: '415694288684',
+          projectId: 'weatherapp-efe44',
         ))
       : await Firebase.initializeApp();
   runApp(const WeatherForeCast());

@@ -66,8 +66,8 @@ class buildTextField extends StatelessWidget {
                 onPressed: onTogglePasswordVisibility, // Call the toggle function
                 icon: Icon(
                   isPasswordVisible
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility,
+                      ? Icons.visibility
+                      : Icons.visibility_off_outlined,
                   color: Colors.grey,
                 ),
               )
