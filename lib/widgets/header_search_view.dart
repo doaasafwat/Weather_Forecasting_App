@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weather_forecasting_app/views/Notification/notification_view.dart';
@@ -5,6 +7,11 @@ import 'package:weather_forecasting_app/views/SettingsView.dart';
 
 class HeaderSearchView extends StatelessWidget {
   const HeaderSearchView({super.key});
+  Future<DocumentSnapshot> getUserData() async {
+    User? currentUser = FirebaseAuth.instance.currentUser;
+    String uid = currentUser!.uid;
+    return await FirebaseFirestore.instance.collection('users').doc(uid).get();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,30 +35,51 @@ class HeaderSearchView extends StatelessWidget {
             const SizedBox(
               width: 10,
             ),
-            const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                DefaultTextStyle(
-                  style: TextStyle(
-                      color: Color(0xff9f7cff),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400),
-                  child: Text('Hi, WelcomeBack'),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                DefaultTextStyle(
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400),
-                  child: Text('John Doe'),
-                ),
-              ],
+            FutureBuilder<DocumentSnapshot>(
+              future: getUserData(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return const Text(
+                    'Error',
+                    style: TextStyle(color: Colors.red),
+                  );
+                } else if (snapshot.hasData) {
+                  var userData = snapshot.data!.data() as Map<String, dynamic>;
+                  String username = userData['username'] ?? 'User';
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Hi, Welcome Back',
+                        style: TextStyle(
+                          color: Color(0xff9f7cff),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        username,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return const Text('No Data');
+                }
+              },
             ),
-            const SizedBox(
-              width: 60,
+            const Expanded(
+              child: SizedBox(),
             ),
             Container(
               width: 40,
@@ -94,7 +122,10 @@ class HeaderSearchView extends StatelessWidget {
                 },
                 icon: const Icon(FontAwesomeIcons.gear),
               ),
-            )
+            ),
+            const SizedBox(
+              width: 8,
+            ),
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_forecasting_app/loginAndregister/_views/login_screen.dart';
@@ -17,10 +18,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  // Initialize Firebase Authentication instance
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  // Controllers for TextFields
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -37,14 +35,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
 
     try {
-      await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const LoginView()),
-      );
+      String uid = userCredential.user!.uid;
+
+     
+      await FirebaseFirestore.instance.collection('users').doc(uid).set({
+        'username': usernameController.text,
+        'email': emailController.text,
+      });
+
+ 
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginView()),
+        );
+      });
     } on FirebaseAuthException catch (e) {
       setState(() {
         statusMessage = e.message ?? "Registration failed. Try again.";
@@ -114,10 +124,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     hintText: 'Confirm Password',
                     isPassword: true,
                     screenHeight: screenHeight,
-                     isPasswordVisible: isPasswordVisible,
+                    isPasswordVisible: isPasswordVisible,
                     onTogglePasswordVisibility: () {
                       setState(() {
-                        isPasswordVisible = !isPasswordVisible; // Toggle visibility
+                        isPasswordVisible =
+                            !isPasswordVisible; // Toggle visibility
                       });
                     },
                   ),

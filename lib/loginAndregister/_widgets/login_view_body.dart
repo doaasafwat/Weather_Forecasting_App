@@ -9,9 +9,6 @@ import 'package:weather_forecasting_app/loginAndregister/_widgets/build_social_l
 import 'package:weather_forecasting_app/loginAndregister/_widgets/build_text_field.dart';
 import 'package:weather_forecasting_app/loginAndregister/_widgets/welcome_text.dart';
 
-
-
-
 import 'package:weather_forecasting_app/views/create_new_password.dart';
 import 'package:weather_forecasting_app/views/search_view.dart';
 
@@ -31,9 +28,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   final TextEditingController passwordController = TextEditingController();
   String statusMessage = '';
   Color textColor = Colors.grey.shade400;
-   bool isPasswordVisible = false;
-
-
+  bool isPasswordVisible = false;
 
   Future<void> loginUser() async {
     try {
@@ -43,8 +38,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
       );
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-            builder: (context) => const WeatherForecastDetailsView()),
+        MaterialPageRoute(builder: (context) => const SearchView()),
       );
     } on FirebaseAuthException catch (e) {
       setState(() {
@@ -66,7 +60,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
     }
   }
 
-  
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -110,21 +103,13 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     isPasswordVisible: isPasswordVisible,
                     onTogglePasswordVisibility: () {
                       setState(() {
-                        isPasswordVisible = !isPasswordVisible; // Toggle visibility
+                        isPasswordVisible =
+                            !isPasswordVisible; // Toggle visibility
                       });
                     },
                   ),
-                  SizedBox(height: screenHeight * 0.02),
-                         
-                 BuildForgotPassword(textColor:Colors.white ,onTap:(){} ,),
+
                   SizedBox(height: screenHeight * 0.03),
-                  buildButton(context, screenHeight, screenWidth, 'Login', () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SearchView()),
-                    );
-                  }),
 
                   BuildForgotPassword(
                       textColor: textColor,
