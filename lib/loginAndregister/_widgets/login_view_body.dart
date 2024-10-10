@@ -7,8 +7,9 @@ import 'package:weather_forecasting_app/loginAndregister/_widgets/build_register
 import 'package:weather_forecasting_app/loginAndregister/_widgets/build_social_login_buttons.dart';
 import 'package:weather_forecasting_app/loginAndregister/_widgets/build_text_field.dart';
 import 'package:weather_forecasting_app/loginAndregister/_widgets/welcome_text.dart';
+
+import 'package:weather_forecasting_app/views/search_view.dart';
 import 'package:weather_forecasting_app/views/splash_view.dart';
-import 'package:weather_forecasting_app/views/weather_forecast_details_view.dart';
 
 class LoginViewBody extends StatelessWidget {
   const LoginViewBody({super.key});
@@ -34,8 +35,11 @@ class LoginViewBody extends StatelessWidget {
                     MainAxisSize.min, // Set column to fit children only
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  buildBackButton(context,onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>const SplashView()));
+                  buildBackButton(context, onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SplashView()));
                   }),
                   SizedBox(height: screenHeight * 0.05),
                   WelcomeText(screenWidth: screenWidth),
@@ -44,17 +48,15 @@ class LoginViewBody extends StatelessWidget {
                   SizedBox(height: screenHeight * 0.02),
                   buildTextField('Enter your password', true, screenHeight),
                   SizedBox(height: screenHeight * 0.02),
-                  buildForgotPassword(),
+                const BuildForgetPassword(),
                   SizedBox(height: screenHeight * 0.03),
-                  buildButton(context,screenHeight, screenWidth, 'Login',
-                  (){
+                  buildButton(context, screenHeight, screenWidth, 'Login', () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const WeatherForecastDetailsView()),
-                      );
-                  }
-                  
-                  ),
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SearchView()),
+                    );
+                  }),
                   SizedBox(height: screenHeight * 0.03),
                   buildDividerWithText('Or Login With'),
                   SizedBox(height: screenHeight * 0.02),
