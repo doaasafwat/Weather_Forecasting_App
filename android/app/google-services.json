@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "415694288684",
+    "project_id": "weatherapp-efe44",
+    "storage_bucket": "weatherapp-efe44.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:415694288684:android:7610c894d2516cd7929e89",
+        "android_client_info": {
+          "package_name": "com.foire.weather_forecasting_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF2axobwU3pCHvo10OstvdmtCu-XzI6z8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
