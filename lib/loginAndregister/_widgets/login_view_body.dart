@@ -9,11 +9,9 @@ import 'package:weather_forecasting_app/loginAndregister/_widgets/build_social_l
 import 'package:weather_forecasting_app/loginAndregister/_widgets/build_text_field.dart';
 import 'package:weather_forecasting_app/loginAndregister/_widgets/welcome_text.dart';
 
-import 'package:weather_forecasting_app/views/create_new_password.dart';
 import 'package:weather_forecasting_app/views/search_view.dart';
 
 import 'package:weather_forecasting_app/views/splash_view.dart';
-import 'package:weather_forecasting_app/views/weather_forecast_details_view.dart';
 
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});
@@ -27,7 +25,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   String statusMessage = '';
-  Color textColor = Colors.grey.shade400;
   bool isPasswordVisible = false;
 
   Future<void> loginUser() async {
@@ -44,15 +41,12 @@ class _LoginViewBodyState extends State<LoginViewBody> {
       setState(() {
         if (e.code == 'wrong-password') {
           statusMessage = 'The password you entered is incorrect.';
-          textColor = const Color(0xFF6A55E0);
         } else if (e.code == 'user-not-found') {
           statusMessage = 'Email or password is incorrect.';
         } else if (e.code == 'invalid-email') {
           statusMessage = 'Please enter valid email address.';
-          textColor = const Color(0xFF6A55E0);
         } else if (e.code == 'invalid-credential') {
           statusMessage = 'Email or password is incorrect.';
-          textColor = const Color(0xFF6A55E0);
         } else {
           statusMessage = 'Login failed. Please try again.';
         }
@@ -111,17 +105,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
 
                   SizedBox(height: screenHeight * 0.03),
 
-                  BuildForgotPassword(
-                      textColor: textColor,
-                      onTap: textColor == const Color(0xFF6A55E0)
-                          ? () {
-                              Navigator.push(context, MaterialPageRoute(
-                                builder: (context) {
-                                  return const CreateNewPassword();
-                                },
-                              ));
-                            }
-                          : null),
+                  const BuildForgotPassword(),
                   SizedBox(height: screenHeight * 0.03),
                   buildButton(
                     context,
