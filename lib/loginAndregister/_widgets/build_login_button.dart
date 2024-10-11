@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget buildButton(BuildContext context,double screenHeight, double screenWidth, String label,void Function()? onTap) {
+Widget buildButton(BuildContext context,double screenHeight, double screenWidth, String label,void Function() onTap) {
   return GestureDetector(
     onTap: onTap,
     child: Container(

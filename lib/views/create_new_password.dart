@@ -1,13 +1,61 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_forecasting_app/loginAndregister/_widgets/build_text_field.dart';
 import 'package:weather_forecasting_app/views/password_changed_view.dart';
 import 'package:weather_forecasting_app/widgets/custom_button.dart';
-import 'package:weather_forecasting_app/widgets/custom_text_field.dart';
 
-class CreateNewPassword extends StatelessWidget {
+class CreateNewPassword extends StatefulWidget {
   const CreateNewPassword({super.key});
 
   @override
+  State<CreateNewPassword> createState() => _CreateNewPasswordState();
+}
+
+class _CreateNewPasswordState extends State<CreateNewPassword> {
+  @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    bool isCurrentPasswordVisible = false;
+bool isNewPasswordVisible = false;
+bool isConfirmPasswordVisible = false;
+    final TextEditingController currentPasswordController =
+        TextEditingController();
+    final TextEditingController newPasswordController = TextEditingController();
+    final TextEditingController confirmPasswordController =
+        TextEditingController();
+    String statusMessage = '';
+
+    Future<void> changePassword() async {
+      final user = FirebaseAuth.instance.currentUser;
+
+      if (user == null) {
+        setState(() {
+          statusMessage = 'No user is currently logged in.';
+        });
+        return;
+      }
+
+      try {
+        // Reauthenticate the user
+        final credential = EmailAuthProvider.credential(
+          email: user.email!,
+          password: currentPasswordController.text.trim(),
+        );
+
+        await user.reauthenticateWithCredential(credential);
+
+        // Change password
+        await user.updatePassword(newPasswordController.text.trim());
+        setState(() {
+          statusMessage = 'Password changed successfully!';
+        });
+      } on FirebaseAuthException catch (e) {
+        setState(() {
+          statusMessage = e.message ?? 'An error occurred';
+        });
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff1D2837),
@@ -49,34 +97,77 @@ class CreateNewPassword extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              const TextFieldWidget(
-                label: 'Current password',
+              buildTextField(
+                controller: currentPasswordController,
+                hintText: 'Current password',
+                isPassword: true,
+                screenHeight: screenHeight,
+                isPasswordVisible: isCurrentPasswordVisible,
+                onTogglePasswordVisibility: () {
+                  setState(() {
+                    isCurrentPasswordVisible= !isCurrentPasswordVisible; // Toggle visibility
+                  });
+                },
               ),
               const SizedBox(
                 height: 20,
               ),
-              const TextFieldWidget(
-                label: 'New password',
+              buildTextField(
+                controller: newPasswordController,
+                hintText: 'New password',
+                isPassword: true,
+                screenHeight: screenHeight,
+                isPasswordVisible: isNewPasswordVisible,
+                onTogglePasswordVisibility: () {
+                  setState(() {
+                    isNewPasswordVisible = !isNewPasswordVisible; // Toggle visibility
+                  });
+                },
               ),
               const SizedBox(
                 height: 20,
               ),
-              const TextFieldWidget(
-                label: 'Confirm password',
+              buildTextField(
+                controller: confirmPasswordController,
+                hintText: 'Confirm password',
+                isPassword: true,
+                screenHeight: screenHeight,
+                isPasswordVisible: isConfirmPasswordVisible,
+                onTogglePasswordVisibility: () {
+                  setState(() {
+                    isConfirmPasswordVisible = !isConfirmPasswordVisible; // Toggle visibility
+                  });
+                },
               ),
               const SizedBox(
                 height: 20,
               ),
               CustomButton(
-                text: 'Create',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const PasswordChangedView()),
-                  );
-                },
-              ),
+                  text: 'Create',
+                  onTap: () async {
+  if (newPasswordController.text.trim() != confirmPasswordController.text.trim()) {
+    setState(() {
+      statusMessage = 'New password and confirmation do not match.';
+    });
+    return;
+  }
+  
+  await changePassword(); 
+
+  if (statusMessage == 'Password changed successfully!') {
+    Navigator.push(
+      // ignore: use_build_context_synchronously
+      context,
+      MaterialPageRoute(builder: (context) => const PasswordChangedView()),
+    );
+  }
+},),
+              if (statusMessage.isNotEmpty)
+                Text(
+                  statusMessage,
+                  style: const TextStyle(color: Colors.redAccent),
+                  textAlign: TextAlign.center,
+                ),
             ],
           ),
         ),
