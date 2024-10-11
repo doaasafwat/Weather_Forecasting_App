@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatefulWidget {
-  const TextFieldWidget({super.key, required this.label});
+  const TextFieldWidget({super.key, required this.label, required this.controller});
   final String? label;
-
+final TextEditingController? controller;
   @override
   State<TextFieldWidget> createState() => _TextFieldState();
 }
@@ -21,7 +21,7 @@ class _TextFieldState extends State<TextFieldWidget> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: TextFormField(
+      child: TextFormField(controller: widget.controller,
         obscureText: _obscureText,
         style: const TextStyle(color: Colors.white, fontSize: 15),
         decoration: InputDecoration(
