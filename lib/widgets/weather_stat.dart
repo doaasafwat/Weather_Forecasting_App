@@ -26,7 +26,7 @@ class WeatherStat extends StatelessWidget {
         ),
         Text(
           unit,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             color: Colors.white,
           ),

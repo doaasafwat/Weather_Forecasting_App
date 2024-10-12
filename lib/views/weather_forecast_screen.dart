@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecasting_app/models/weather_model.dart';
 import 'package:weather_forecasting_app/widgets/forecast_item.dart';
 
 class WeatherForecastScreen extends StatelessWidget {
+  final List<WeatherModel> forecast;
+  WeatherForecastScreen({required this.forecast});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +52,7 @@ class WeatherForecastScreen extends StatelessWidget {
                   Column(
                     children: [
                       Text(
-                        '24°',
+                        '°',
                         style: TextStyle(
                             fontSize: 64,
                             fontWeight: FontWeight.bold,

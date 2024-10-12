@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecasting_app/models/weather_model.dart';
 import 'package:weather_forecasting_app/widgets/hourly_forecast_item.dart';
 import 'package:weather_forecasting_app/widgets/weather_stat.dart';
 
 class WeatherTodayScreen extends StatelessWidget {
-  const WeatherTodayScreen({super.key});
+  const WeatherTodayScreen({super.key, required this.weatherModel});
+
+  final WeatherModel weatherModel;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF1D2837),
+      backgroundColor: const Color(0xFF1D2837),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {},
         ),
         centerTitle: true,
-        title: Row(
+        title: const Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.location_pin, color: Colors.purpleAccent),
@@ -43,18 +46,18 @@ class WeatherTodayScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Image.asset('assets/images/Image.png'),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   Text(
-                    'Partly Cloudy',
-                    style: TextStyle(
+                    "condition",
+                    style: const TextStyle(
                       fontSize: 34,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    '24°',
-                    style: TextStyle(
+                    'temp°',
+                    style: const TextStyle(
                       fontSize: 52,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -63,7 +66,7 @@ class WeatherTodayScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 22),
+            const SizedBox(height: 22),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -72,17 +75,21 @@ class WeatherTodayScreen extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: 52),
+            const SizedBox(height: 52),
             // Stats Row
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                WeatherStat(unit: '%', value: '6', color: Colors.purple),
-                WeatherStat(unit: '%', value: '90', color: Colors.purple),
-                WeatherStat(unit: 'km/h', value: '19', color: Colors.purple),
+                WeatherStat(
+                  unit: '%',
+                  value: '12',
+                  color: Colors.purple,
+                ),
+                WeatherStat(unit: 'Km/s', value: '17', color: Colors.purple),
+                WeatherStat(unit: 'hPa', value: '1', color: Colors.purple),
               ],
             ),
-            SizedBox(height: 22),
+            const SizedBox(height: 22),
             // Hourly Forecast
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -91,7 +98,7 @@ class WeatherTodayScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Today',
                         style: TextStyle(
                           color: Colors.white,
@@ -101,7 +108,7 @@ class WeatherTodayScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () => Navigator.pushNamed(context, '/forecast'),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             "7 Days",
                             style: TextStyle(
@@ -113,8 +120,8 @@ class WeatherTodayScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 22),
-                  Row(
+                  const SizedBox(height: 22),
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       HourlyForecastItem(
