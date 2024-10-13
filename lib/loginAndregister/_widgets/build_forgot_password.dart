@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecasting_app/loginAndregister/_views/forget_screen.dart';
 import 'package:weather_forecasting_app/views/create_new_password.dart';
 
 class BuildForgotPassword extends StatelessWidget {
@@ -14,7 +15,7 @@ class BuildForgotPassword extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const CreateNewPassword(),
+              builder: (context) => const ForgetPage(),
             ),
           );
         },

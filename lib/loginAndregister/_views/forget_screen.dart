@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:weather_forecasting_app/loginAndregister/_views/login_screen.dart';
 
-class ForgetPage extends StatelessWidget {
+class ForgetPage extends StatefulWidget {
   const ForgetPage({super.key});
 
+  @override
+  State<ForgetPage> createState() => _ForgetPageState();
+}
+
+class _ForgetPageState extends State<ForgetPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +29,7 @@ class ForgetPage extends StatelessWidget {
               child: IconButton(
                 icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
                 onPressed: () {
-                  // Handle back button press
+                  Navigator.of(context).pop();
                 },
               ),
             ),

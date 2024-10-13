@@ -24,7 +24,7 @@ class OtpVerification extends StatelessWidget {
               child: IconButton(
                 icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
                 onPressed: () {
-                  // Handle back button press
+                  Navigator.of(context).pop();
                 },
               ),
             ),
