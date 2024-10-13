@@ -6,8 +6,11 @@ import 'package:weather_forecasting_app/widgets/weather_icons.dart';
 import 'package:weather_forecasting_app/widgets/weather_stat.dart';
 
 class WeatherTodayScreen extends StatelessWidget {
-  const WeatherTodayScreen(
-      {super.key, required this.weatherModel, required this.hour});
+  const WeatherTodayScreen({
+    super.key,
+    required this.weatherModel,
+    required this.hour,
+  });
 
   final WeatherModel weatherModel;
   final Hour hour;
@@ -21,17 +24,17 @@ class WeatherTodayScreen extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {},
+          onPressed: () => Navigator.pop(context),
         ),
         centerTitle: true,
-        title: const Row(
+        title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.location_pin, color: Colors.purpleAccent),
             SizedBox(width: 5),
             Text(
-              'New York',
-              style: TextStyle(
+              weatherModel.location.name,
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 18,
               ),
@@ -45,7 +48,6 @@ class WeatherTodayScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Main Weather Info
             Center(
               child: Column(
                 children: [
@@ -75,22 +77,13 @@ class WeatherTodayScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 22),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  children: [Image.asset('assets/images/temperature.png')],
-                )
-              ],
-            ),
-            const SizedBox(height: 52),
             // Stats Row
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 WeatherStat(
                   unit: '%',
-                  value: '12',
+                  value: '${weatherModel.current.humidity}',
                   color: Colors.purple,
                 ),
                 WeatherStat(
@@ -104,7 +97,7 @@ class WeatherTodayScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 22),
-            // Hourly Forecast
+
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: Column(

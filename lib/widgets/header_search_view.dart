@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:weather_forecasting_app/views/Notification/notification_view.dart';
-import 'package:weather_forecasting_app/views/SettingsView.dart';
 
 class HeaderSearchView extends StatelessWidget {
   const HeaderSearchView({super.key});
@@ -13,6 +10,7 @@ class HeaderSearchView extends StatelessWidget {
     return await FirebaseFirestore.instance.collection('users').doc(uid).get();
   }
 
+  @override
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,22 +30,18 @@ class HeaderSearchView extends StatelessWidget {
                 size: 50,
               ),
             ),
-            const SizedBox(
-              width: 10,
-            ),
+            const SizedBox(width: 10),
             FutureBuilder<DocumentSnapshot>(
               future: getUserData(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const CircularProgressIndicator();
                 } else if (snapshot.hasError) {
-                  return const Text(
-                    'Error',
-                    style: TextStyle(color: Colors.red),
-                  );
+                  return const Text('Error',
+                      style: TextStyle(color: Colors.red));
                 } else if (snapshot.hasData) {
-                  var userData = snapshot.data!.data() as Map<String, dynamic>;
-                  String username = userData['username'] ?? 'User';
+                  var userData = snapshot.data!.data() as Map<String, dynamic>?;
+                  String username = userData?['username'] ?? 'User';
 
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,21 +49,17 @@ class HeaderSearchView extends StatelessWidget {
                       const Text(
                         'Hi, Welcome Back',
                         style: TextStyle(
-                          color: Color(0xff9f7cff),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
+                            color: Color(0xff9f7cff),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
                       ),
-                      const SizedBox(
-                        height: 5,
-                      ),
+                      const SizedBox(height: 5),
                       Text(
                         username,
                         style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
                       ),
                     ],
                   );
@@ -78,54 +68,7 @@ class HeaderSearchView extends StatelessWidget {
                 }
               },
             ),
-            const Expanded(
-              child: SizedBox(),
-            ),
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: const Color(0xffCAD6FF),
-              ),
-              child: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const NotificationView(),
-                    ),
-                  );
-                },
-                icon: const Icon(FontAwesomeIcons.bell),
-              ),
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: const Color(0xffCAD6FF),
-              ),
-              child: IconButton(
-                alignment: Alignment.center,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Setting(),
-                    ),
-                  );
-                },
-                icon: const Icon(FontAwesomeIcons.gear),
-              ),
-            ),
-            const SizedBox(
-              width: 8,
-            ),
+            const Expanded(child: SizedBox()),
           ],
         ),
       ),
