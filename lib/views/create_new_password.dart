@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:weather_forecasting_app/loginAndregister/_widgets/build_text_field.dart';
 import 'package:weather_forecasting_app/views/password_changed_view.dart';
 import 'package:weather_forecasting_app/widgets/custom_button.dart';
 import 'package:weather_forecasting_app/widgets/custom_text_field.dart';

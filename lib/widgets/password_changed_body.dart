@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weather_forecasting_app/views/search_view.dart';
+import 'package:weather_forecasting_app/loginAndregister/_views/login_screen.dart';
+
 import 'package:weather_forecasting_app/widgets/custom_button.dart';
 
 class PasswordChangedBody extends StatelessWidget {
@@ -44,7 +45,7 @@ class PasswordChangedBody extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const SearchView(),
+                    builder: (context) => const LoginView(),
                   ),
                 );
               },

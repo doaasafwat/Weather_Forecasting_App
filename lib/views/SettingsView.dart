@@ -11,8 +11,16 @@ class Setting extends StatefulWidget {
 
 class _SettingState extends State<Setting> {
   bool cellurData = true;
+double displayTemperature(double temp) {
+  if (isCelsius) {
+    return temp; 
+  } else {
+    return (temp * 9 / 5) + 32; 
+  }
+}
 
-  bool celsius = true;
+  bool isCelsius = true;
+bool isFahrenheit = false;
   bool resetIdentifier = false;
   @override
   Widget build(BuildContext context) {
@@ -85,23 +93,27 @@ class _SettingState extends State<Setting> {
                         'celsius',
                         style: TextStyle(color: Colors.white),
                       ),
-                      value: celsius,
-                      onChanged: (val) {
-                        setState(() {
-                          celsius = val!;
-                        });
-                      }),
+                        value: isCelsius,
+  onChanged: (newValue) {
+    setState(() {
+      isCelsius = newValue!;
+      isFahrenheit = !newValue; 
+    });
+  },
+),
                   CheckboxListTile(
                       title: const Text(
                         'fahrenheit',
                         style: TextStyle(color: Colors.white),
                       ),
-                      value: !celsius,
-                      onChanged: (val) {
-                        setState(() {
-                          celsius = !val!;
-                        });
-                      })
+                      value: isFahrenheit,
+  onChanged: (newValue) {
+    setState(() {
+      isFahrenheit = newValue!;
+      isCelsius = !newValue; 
+    });
+  },
+)
                 ],
               ),
               SwitchListTile(
