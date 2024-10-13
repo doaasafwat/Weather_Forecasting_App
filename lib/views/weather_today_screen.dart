@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecasting_app/models/hour.dart';
 import 'package:weather_forecasting_app/models/weather_model.dart';
 import 'package:weather_forecasting_app/widgets/hourly_forecast_item.dart';
+import 'package:weather_forecasting_app/widgets/weather_icons.dart';
 import 'package:weather_forecasting_app/widgets/weather_stat.dart';
 
 class WeatherTodayScreen extends StatelessWidget {
-  const WeatherTodayScreen({super.key, required this.weatherModel});
+  const WeatherTodayScreen(
+      {super.key, required this.weatherModel, required this.hour});
 
   final WeatherModel weatherModel;
+  final Hour hour;
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +49,14 @@ class WeatherTodayScreen extends StatelessWidget {
             Center(
               child: Column(
                 children: [
-                  Image.asset('assets/images/Image.png'),
+                  Image.network(
+                    'https:${weatherModel.current.iconUrl}',
+                    height: 100,
+                    width: 100,
+                  ),
                   const SizedBox(height: 12),
                   Text(
-                    "condition",
+                    weatherModel.current.condition,
                     style: const TextStyle(
                       fontSize: 34,
                       color: Colors.white,
@@ -56,7 +64,7 @@ class WeatherTodayScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'temp°',
+                    '${weatherModel.current.temperature}°',
                     style: const TextStyle(
                       fontSize: 52,
                       fontWeight: FontWeight.bold,
@@ -85,8 +93,14 @@ class WeatherTodayScreen extends StatelessWidget {
                   value: '12',
                   color: Colors.purple,
                 ),
-                WeatherStat(unit: 'Km/s', value: '17', color: Colors.purple),
-                WeatherStat(unit: 'hPa', value: '1', color: Colors.purple),
+                WeatherStat(
+                    unit: '%',
+                    value: '${weatherModel.current.humidity}',
+                    color: Colors.purple),
+                WeatherStat(
+                    unit: 'Km/h',
+                    value: '${weatherModel.current.windSpeed}',
+                    color: Colors.purple)
               ],
             ),
             const SizedBox(height: 22),
@@ -121,20 +135,19 @@ class WeatherTodayScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 22),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      HourlyForecastItem(
-                          time: '9AM', temp: '18°', icon: Icons.wb_cloudy),
-                      HourlyForecastItem(
-                          time: '10AM', temp: '19°', icon: Icons.wind_power),
-                      HourlyForecastItem(
-                          time: '11AM', temp: '24°', icon: Icons.wb_cloudy),
-                      HourlyForecastItem(
-                          time: '12PM', temp: '25°', icon: Icons.wb_sunny),
-                      HourlyForecastItem(
-                          time: '1PM', temp: '26°', icon: Icons.wb_sunny),
-                    ],
+                    children: weatherModel.forecast[0].hour.take(5).map((hour) {
+                      String time = hour.time.contains(' ')
+                          ? hour.time.split(' ')[1]
+                          : hour.time;
+
+                      return HourlyForecastItem(
+                        time: time,
+                        temp: '${hour.temperature}°',
+                        icon: getWeatherIcon(hour.condition),
+                      );
+                    }).toList(),
                   )
                 ],
               ),

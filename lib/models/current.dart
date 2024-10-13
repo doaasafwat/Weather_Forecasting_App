@@ -3,12 +3,14 @@ class Current {
   final String condition;
   final double humidity;
   final double windSpeed;
+  final String iconUrl;
 
   Current({
     required this.temperature,
     required this.condition,
     required this.humidity,
     required this.windSpeed,
+    required this.iconUrl,
   });
 
   factory Current.fromJson(Map<String, dynamic> json) {
@@ -17,6 +19,7 @@ class Current {
       condition: json['condition']['text'],
       humidity: json['humidity'],
       windSpeed: json['wind_kph'],
+      iconUrl: json['condition']['icon'],
     );
   }
 }

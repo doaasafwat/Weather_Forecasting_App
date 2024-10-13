@@ -4,6 +4,7 @@ class Hour {
   final String condition;
   final double windSpeed;
   final double humidity;
+  final String iconUrl;
 
   Hour({
     required this.time,
@@ -11,6 +12,7 @@ class Hour {
     required this.condition,
     required this.windSpeed,
     required this.humidity,
+    required this.iconUrl,
   });
 
   factory Hour.fromJson(Map<String, dynamic> json) {
@@ -20,6 +22,7 @@ class Hour {
       condition: json['condition']['text'],
       windSpeed: json['wind_kph'],
       humidity: json['humidity'],
+      iconUrl: json['condition']['icon'],
     );
   }
 }
