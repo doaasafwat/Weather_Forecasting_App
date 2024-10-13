@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecasting_app/cubits/get_weather_cubit/get_weather_cubit.dart';
@@ -30,8 +29,9 @@ class CustomSearchTextField extends StatelessWidget {
           prefixIcon: IconButton(
             onPressed: () {
               if (textKey.currentState!.validate()) {
-            
-                context.read<GetWeatherCubit>().getWeather(cityName: textController.text.trim());
+                context
+                    .read<GetWeatherCubit>()
+                    .getWeather(cityName: textController.text.trim());
               }
             },
             icon: const Icon(
@@ -42,7 +42,11 @@ class CustomSearchTextField extends StatelessWidget {
           ),
           suffixIcon: IconButton(
             onPressed: () {
-              textController.clear();
+              if (textKey.currentState!.validate()) {
+                context
+                    .read<GetWeatherCubit>()
+                    .getWeather(cityName: textController.text.trim());
+              }
             },
             icon: Image.asset(
               'assets/images/Icon.png',
