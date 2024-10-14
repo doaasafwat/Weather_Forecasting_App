@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecasting_app/views/create_new_password.dart';
 
 import 'package:weather_forecasting_app/widgets/custom_list_tile.dart';
 
@@ -11,21 +12,21 @@ class Setting extends StatefulWidget {
 
 class _SettingState extends State<Setting> {
   bool cellurData = true;
-double displayTemperature(double temp) {
-  if (isCelsius) {
-    return temp; 
-  } else {
-    return (temp * 9 / 5) + 32; 
+  double displayTemperature(double temp) {
+    if (isCelsius) {
+      return temp;
+    } else {
+      return (temp * 9 / 5) + 32;
+    }
   }
-}
 
   bool isCelsius = true;
-bool isFahrenheit = false;
+  bool isFahrenheit = false;
   bool resetIdentifier = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: const Color(0xFF1D2837),
+      backgroundColor: const Color(0xFF1D2837),
       appBar: AppBar(
         centerTitle: true,
         leading: Container(
@@ -77,6 +78,18 @@ bool isFahrenheit = false;
                   iconBackgroundColor: Color.fromARGB(255, 23, 97, 110),
                   title: 'Language',
                   trailingTitle: 'EN'),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const CreateNewPassword();
+                  }));
+                },
+                child: const CustomListTileWidget(
+                    icon: Icons.password,
+                    iconBackgroundColor: Colors.blue,
+                    title: 'Change Password',
+                    trailingTitle: ''),
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -89,31 +102,31 @@ bool isFahrenheit = false;
                     ),
                   ),
                   CheckboxListTile(
-                      title: const Text(
-                        'celsius',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                        value: isCelsius,
-  onChanged: (newValue) {
-    setState(() {
-      isCelsius = newValue!;
-      isFahrenheit = !newValue; 
-    });
-  },
-),
+                    title: const Text(
+                      'celsius',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    value: isCelsius,
+                    onChanged: (newValue) {
+                      setState(() {
+                        isCelsius = newValue!;
+                        isFahrenheit = !newValue;
+                      });
+                    },
+                  ),
                   CheckboxListTile(
-                      title: const Text(
-                        'fahrenheit',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      value: isFahrenheit,
-  onChanged: (newValue) {
-    setState(() {
-      isFahrenheit = newValue!;
-      isCelsius = !newValue; 
-    });
-  },
-)
+                    title: const Text(
+                      'fahrenheit',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    value: isFahrenheit,
+                    onChanged: (newValue) {
+                      setState(() {
+                        isFahrenheit = newValue!;
+                        isCelsius = !newValue;
+                      });
+                    },
+                  )
                 ],
               ),
               SwitchListTile(
