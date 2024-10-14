@@ -6,11 +6,11 @@ class WeatherStat extends StatelessWidget {
   final Color color;
 
   const WeatherStat({
-    Key? key,
+    super.key,
     required this.unit,
     required this.value,
     required this.color,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

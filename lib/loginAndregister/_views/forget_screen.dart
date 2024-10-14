@@ -107,7 +107,7 @@ class _ForgetPageState extends State<ForgetPage> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return LoginView();
+                        return const LoginView();
                       }));
                     },
                     child: const Text(

@@ -7,12 +7,12 @@ class ForecastItem extends StatelessWidget {
   final int low;
 
   const ForecastItem({
-    Key? key,
+    super.key,
     required this.day,
     required this.icon,
     required this.high,
     required this.low,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class ForecastItem extends StatelessWidget {
             children: [
               Text(
                 day,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
@@ -37,14 +37,14 @@ class ForecastItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(icon, color: Colors.white),
-              SizedBox(width: 20),
+              const SizedBox(width: 20),
             ],
           ),
           Column(
             children: [
               Text(
                 '$high°',
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               ),
             ],
           ),
@@ -52,7 +52,7 @@ class ForecastItem extends StatelessWidget {
             children: [
               Text(
                 '$low°',
-                style: TextStyle(color: Colors.white70, fontSize: 18),
+                style: const TextStyle(color: Colors.white70, fontSize: 18),
               ),
             ],
           )

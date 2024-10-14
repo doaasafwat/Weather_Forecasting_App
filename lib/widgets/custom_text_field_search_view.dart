@@ -1,79 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weather_forecasting_app/cubits/get_weather_cubit/get_weather_cubit.dart';
-import 'package:weather_forecasting_app/views/weather_today_screen.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomSearchTextField extends StatelessWidget {
-  final TextEditingController controller = TextEditingController();
+  CustomSearchTextField({super.key});
+
+  final textController = TextEditingController();
+  final textKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      decoration: InputDecoration(
-        fillColor: const Color.fromARGB(255, 243, 241, 241),
-        filled: true,
-        hintText: ' Search...',
-        hintStyle: const TextStyle(color: Colors.grey, fontSize: 18),
-        prefixIcon: IconButton(
-          onPressed: () async {
-            final cityName = controller.text.trim();
-            if (cityName.isNotEmpty) {
-              await BlocProvider.of<GetWeatherCubit>(context)
-                  .getWeather(cityName: cityName);
-              final weatherModel =
-                  BlocProvider.of<GetWeatherCubit>(context).weatherModel;
-
-              if (weatherModel != null) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => WeatherTodayScreen(
-                      weatherModel: weatherModel,
-                      cityName: cityName,
-                    ),
-                  ),
-                );
+    return Form(
+      key: textKey,
+      child: TextFormField(
+        controller: textController,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'This Field is required';
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+          fillColor: const Color.fromARGB(255, 243, 241, 241),
+          filled: true,
+          hintText: 'Search...',
+          hintStyle: const TextStyle(color: Colors.grey, fontSize: 18),
+          prefixIcon: IconButton(
+            onPressed: () {
+              if (textKey.currentState!.validate()) {
+                context
+                    .read<GetWeatherCubit>()
+                    .getWeather(cityName: textController.text.trim());
               }
-            }
-          },
-          icon: const Icon(
-            FontAwesomeIcons.magnifyingGlass,
-            color: Colors.grey,
-            size: 25,
+            },
+            icon: const Icon(
+              FontAwesomeIcons.magnifyingGlass,
+              color: Colors.grey,
+              size: 25,
+            ),
           ),
-        ),
-        suffixIcon: IconButton(
-          onPressed: () async {
-            final cityName = controller.text.trim();
-            if (cityName.isNotEmpty) {
-              await BlocProvider.of<GetWeatherCubit>(context)
-                  .getWeather(cityName: cityName);
-              final weatherModel =
-                  BlocProvider.of<GetWeatherCubit>(context).weatherModel;
-
-              if (weatherModel != null) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => WeatherTodayScreen(
-                      weatherModel: weatherModel,
-                      cityName: cityName,
-                    ),
-                  ),
-                );
+          suffixIcon: IconButton(
+            onPressed: () {
+              if (textKey.currentState!.validate()) {
+                context
+                    .read<GetWeatherCubit>()
+                    .getWeather(cityName: textController.text.trim());
               }
-            }
-          },
-          icon: Image.asset(
-            'assets/images/Icon.png',
-            height: 40,
-            width: 40,
+            },
+            icon: Image.asset(
+              'assets/images/Icon.png',
+              height: 40,
+              width: 40,
+            ),
           ),
+          enabledBorder: buildOutlineInputBorder(),
+          focusedBorder: buildOutlineInputBorder(),
         ),
-        enabledBorder: buildOutlineInputBorder(),
-        focusedBorder: buildOutlineInputBorder(),
       ),
     );
   }

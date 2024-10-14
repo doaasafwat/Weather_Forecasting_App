@@ -1,12 +1,13 @@
-
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_forecasting_app/cubits/get_weather_cubit/get_weather_cubit.dart';
 import 'package:weather_forecasting_app/views/splash_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-   Platform.isAndroid
+  Platform.isAndroid
       ? await Firebase.initializeApp(
           options: const FirebaseOptions(
           apiKey: 'AIzaSyBF2axobwU3pCHvo10OstvdmtCu-XzI6z8',
@@ -15,7 +16,14 @@ void main() async {
           projectId: 'weatherapp-efe44',
         ))
       : await Firebase.initializeApp();
-  runApp(const WeatherForeCast());
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => GetWeatherCubit()), 
+      ],
+      child: const WeatherForeCast(),
+    ),
+  );
 }
 
 class WeatherForeCast extends StatelessWidget {

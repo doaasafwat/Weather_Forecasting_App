@@ -7,7 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecasting_app/cubits/get_weather_cubit/get_weather_cubit.dart';
 
 class WeatherForecastScreen extends StatelessWidget {
-  WeatherForecastScreen({required this.cityName, required this.weatherModel});
+  const WeatherForecastScreen(
+      {super.key, required this.cityName, required this.weatherModel});
   final String cityName;
   final WeatherModel weatherModel;
   @override
