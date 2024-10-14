@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:weather_forecasting_app/models/weather_model.dart';
-import 'package:weather_forecasting_app/widgets/Oops.dart';
+import 'package:weather_forecasting_app/widgets/oops.dart';
 
 class WeatherService {
   final Dio dio;
@@ -28,13 +28,13 @@ class WeatherService {
       WeatherModel weatherModel = WeatherModel.fromJson(response.data);
       return weatherModel;
     } on DioException catch (e) {
-      final String errorMessage =
-          e.response?.data['error']['message'] ?? const Oops();
+      final String errorMessage = e.response?.data['error']['message'] ??
+          Oops(message: e.message!).toString();
       // TODO
       throw Exception(errorMessage);
     } catch (e) {
       log(e.toString());
-      throw Exception(const Oops());
+      throw Exception(Oops(message: e.toString()).toString());
     }
   }
 }

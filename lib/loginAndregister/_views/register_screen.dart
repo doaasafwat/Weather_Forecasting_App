@@ -42,13 +42,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
       );
       String uid = userCredential.user!.uid;
 
-     
       await FirebaseFirestore.instance.collection('users').doc(uid).set({
         'username': usernameController.text,
         'email': emailController.text,
       });
 
- 
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.pushReplacement(
           context,
@@ -91,21 +89,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(height: screenHeight * 0.05),
                   RegisterText(screenWidth: screenWidth),
                   SizedBox(height: screenHeight * 0.03),
-                  buildTextField(
+                  BuildTextField(
                     controller: usernameController,
                     hintText: 'Username',
                     isPassword: false,
                     screenHeight: screenHeight,
                   ),
                   SizedBox(height: screenHeight * 0.02),
-                  buildTextField(
+                  BuildTextField(
                     controller: emailController,
                     hintText: 'Email',
                     isPassword: false,
                     screenHeight: screenHeight,
                   ),
                   SizedBox(height: screenHeight * 0.02),
-                  buildTextField(
+                  BuildTextField(
                     controller: passwordController,
                     hintText: 'Password',
                     isPassword: true,
@@ -119,7 +117,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                   ),
                   SizedBox(height: screenHeight * 0.02),
-                  buildTextField(
+                  BuildTextField(
                     controller: confirmPasswordController,
                     hintText: 'Confirm Password',
                     isPassword: true,

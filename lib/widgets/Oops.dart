@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Oops extends StatelessWidget {
-  const Oops({super.key});
+  const Oops({super.key, required this.message});
+  final String message;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,15 @@ class Oops extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
+               Text(
+                message,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ],
           ),
         ),

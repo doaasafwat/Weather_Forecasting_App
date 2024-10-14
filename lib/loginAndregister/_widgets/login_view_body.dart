@@ -82,14 +82,14 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   SizedBox(height: screenHeight * 0.05),
                   WelcomeText(screenWidth: screenWidth),
                   SizedBox(height: screenHeight * 0.03),
-                  buildTextField(
+                  BuildTextField(
                     controller: emailController,
                     hintText: 'Enter your email',
                     isPassword: false,
                     screenHeight: screenHeight,
                   ),
                   SizedBox(height: screenHeight * 0.02),
-                  buildTextField(
+                  BuildTextField(
                     controller: passwordController,
                     hintText: 'Enter your password',
                     isPassword: true,

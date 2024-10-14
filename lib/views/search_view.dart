@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecasting_app/cubits/get_weather_cubit/get_weather_cubit.dart';
 import 'package:weather_forecasting_app/cubits/get_weather_cubit/get_weather_states.dart';
 import 'package:weather_forecasting_app/views/weather_today_screen.dart';
-import 'package:weather_forecasting_app/widgets/Oops.dart';
+import 'package:weather_forecasting_app/widgets/oops.dart';
 import 'package:weather_forecasting_app/widgets/search_view_body.dart';
 
 class SearchView extends StatelessWidget {
@@ -23,7 +23,9 @@ class SearchView extends StatelessWidget {
             hour: state.weatherModel.forecast[0].hour[0],
           );
         } else if (state is WeatherFailureState) {
-          return const Oops();
+          return Oops(
+            message: state.errorMessage,
+          );
         } else {
           return const Center(child: CircularProgressIndicator());
         }

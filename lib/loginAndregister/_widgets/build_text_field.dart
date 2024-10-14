@@ -25,8 +25,8 @@ import 'package:flutter/material.dart';
 //       ),
 //     );
 //   }
-class buildTextField extends StatelessWidget {
-  const buildTextField({
+class BuildTextField extends StatelessWidget {
+  const BuildTextField({
     super.key,
     required this.hintText,
     required this.isPassword,
@@ -40,7 +40,8 @@ class buildTextField extends StatelessWidget {
   final double screenHeight;
   final TextEditingController? controller;
   final bool isPasswordVisible; // New variable to track password visibility
-  final VoidCallback? onTogglePasswordVisibility; // Callback for toggling visibility
+  final VoidCallback?
+      onTogglePasswordVisibility; // Callback for toggling visibility
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +64,8 @@ class buildTextField extends StatelessWidget {
         ),
         suffixIcon: isPassword
             ? IconButton(
-                onPressed: onTogglePasswordVisibility, // Call the toggle function
+                onPressed:
+                    onTogglePasswordVisibility, // Call the toggle function
                 icon: Icon(
                   isPasswordVisible
                       ? Icons.visibility

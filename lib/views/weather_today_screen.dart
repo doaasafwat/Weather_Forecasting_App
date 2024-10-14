@@ -30,8 +30,8 @@ class WeatherTodayScreen extends StatelessWidget {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.location_pin, color: Colors.purpleAccent),
-            SizedBox(width: 5),
+            const Icon(Icons.location_pin, color: Colors.purpleAccent),
+            const SizedBox(width: 5),
             Text(
               weatherModel.location.name,
               style: const TextStyle(
@@ -39,7 +39,7 @@ class WeatherTodayScreen extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-            Icon(Icons.arrow_drop_down, color: Colors.white),
+            const Icon(Icons.arrow_drop_down, color: Colors.white),
           ],
         ),
       ),

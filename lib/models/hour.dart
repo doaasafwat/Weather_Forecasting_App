@@ -1,9 +1,9 @@
 class Hour {
   final String time;
-  final double temperature;
+  final num temperature;
   final String condition;
-  final double windSpeed;
-  final double humidity;
+  final num windSpeed;
+  final num humidity;
   final String iconUrl;
 
   Hour({

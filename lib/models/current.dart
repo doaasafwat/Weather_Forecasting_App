@@ -1,8 +1,8 @@
 class Current {
-  final double temperature;
+  final num temperature;
   final String condition;
-  final double humidity;
-  final double windSpeed;
+  final num humidity;
+  final num windSpeed;
   final String iconUrl;
 
   Current({

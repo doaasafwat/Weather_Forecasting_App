@@ -1,6 +1,6 @@
 class Day {
-  final double maxTemperature;
-  final double minTemperature;
+  final num maxTemperature;
+  final num minTemperature;
   final String condition;
 
   Day({
