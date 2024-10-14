@@ -19,13 +19,12 @@ class _ForgetPageState extends State<ForgetPage> {
         email: _emailController.text.trim(),
       );
 
-      // إذا تم إرسال البريد بنجاح، انقل المستخدم إلى صفحة "Create New Password"
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-            content: Text('Check the email to reset password and login again')),
+            content: Text(
+                'Check the email to reset password and login again after reseting')),
       );
 
-      // التنقل إلى صفحة "Create New Password"
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const LoginView()),
@@ -102,7 +101,7 @@ class _ForgetPageState extends State<ForgetPage> {
                     ),
                   ),
                   style: const TextStyle(
-                    color: Colors.white, // لون النص في حقل الإدخال
+                    color: Colors.white,
                   ),
                 ),
                 const SizedBox(height: 20),
