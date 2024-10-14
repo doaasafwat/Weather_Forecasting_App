@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_forecasting_app/loginAndregister/_views/login_screen.dart';
+import 'package:weather_forecasting_app/views/create_new_password.dart';
 
 class ForgetPage extends StatefulWidget {
   const ForgetPage({super.key});
@@ -9,6 +11,33 @@ class ForgetPage extends StatefulWidget {
 }
 
 class _ForgetPageState extends State<ForgetPage> {
+  final _emailController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  // دالة إرسال رابط إعادة تعيين كلمة المرور
+  Future<void> _sendPasswordResetEmail() async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+        email: _emailController.text.trim(),
+      );
+
+      // إذا تم إرسال البريد بنجاح، انقل المستخدم إلى صفحة "Create New Password"
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Password reset link sent to email')),
+      );
+
+      // التنقل إلى صفحة "Create New Password"
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const CreateNewPassword()),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: ${e.toString()}')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,88 +69,95 @@ class _ForgetPageState extends State<ForgetPage> {
         color: const Color(0xFF1D2837),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: ListView(
-            children: [
-              const SizedBox(height: 80),
-              const Text(
-                'Forgot Password?',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                "Don't worry! It occurs. Please enter the email address linked with your account.",
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 16,
-                ),
-              ),
-              const SizedBox(height: 30),
-              TextField(
-                style: const TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                  hintText: 'Email',
-                  hintStyle: const TextStyle(color: Colors.white54),
-                  filled: true,
-                  fillColor: Colors.white.withOpacity(0.1),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+          child: Form(
+            key: _formKey,
+            child: ListView(
+              children: [
+                const SizedBox(height: 80),
+                const Text(
+                  'Forgot Password?',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                keyboardType: TextInputType.emailAddress,
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                height: 55,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Handle send code press
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF6C63FF),
-                    shape: RoundedRectangleBorder(
+                const SizedBox(height: 10),
+                const Text(
+                  "Don't worry! It occurs. Please enter the email address linked with your account.",
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 30),
+                TextFormField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    hintText: 'Email',
+                    hintStyle: const TextStyle(color: Colors.white54),
+                    filled: true,
+                    fillColor: Colors.white.withOpacity(0.1),
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text(
-                    'Send Code',
-                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white, // لون النص في حقل الإدخال
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 120,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Remember Password?',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  TextButton(
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  height: 55,
+                  child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return const LoginView();
-                      }));
+                      if (_formKey.currentState!.validate()) {
+                        _sendPasswordResetEmail();
+                      }
                     },
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(
-                        color: Color(0xFF6C63FF),
-                        fontWeight: FontWeight.bold,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF6C63FF),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
                       ),
                     ),
+                    child: const Text(
+                      'Send Code',
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
                   ),
-                ],
-              ),
-              const SizedBox(height: 20),
-            ],
+                ),
+                const SizedBox(
+                  height: 120,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Remember Password?',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const LoginView();
+                        }));
+                      },
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(
+                          color: Color(0xFF6C63FF),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
       ),
