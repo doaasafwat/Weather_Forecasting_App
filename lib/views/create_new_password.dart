@@ -13,12 +13,15 @@ class CreateNewPassword extends StatefulWidget {
 
 class _CreateNewPasswordState extends State<CreateNewPassword> {
   final TextEditingController newPasswordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
-  
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+  final TextEditingController currentPasswordController =
+      TextEditingController();
   String statusMessage = '';
 
   Future<void> resetPassword() async {
-    if (newPasswordController.text.trim() != confirmPasswordController.text.trim()) {
+    if (newPasswordController.text.trim() !=
+        confirmPasswordController.text.trim()) {
       setState(() {
         statusMessage = 'Passwords do not match.';
       });
@@ -27,14 +30,28 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
 
     try {
       final user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
+      if (user != null && currentPasswordController.text.isNotEmpty) {
+        final credential = EmailAuthProvider.credential(
+          email: user.email!,
+          password: currentPasswordController.text.trim(),
+        );
+
+        await user.reauthenticateWithCredential(credential);
+
         await user.updatePassword(newPasswordController.text.trim());
         setState(() {
           statusMessage = 'Password updated successfully!';
         });
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const PasswordChangedView(),
+          ),
+        );
       } else {
         setState(() {
-          statusMessage = 'No user is signed in.';
+          statusMessage = 'Please provide your current password.';
         });
       }
     } on FirebaseAuthException catch (e) {
@@ -46,15 +63,14 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff1D2837),
         leading: Container(
           margin: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8), 
-            color: Colors.white
+            borderRadius: BorderRadius.circular(8),
+            color: Colors.white,
           ),
           child: const BackButton(),
         ),
@@ -72,7 +88,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w500,
-                    color: Colors.white
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -84,11 +100,16 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.white,
-                    fontWeight: FontWeight.w300
+                    fontWeight: FontWeight.w300,
                   ),
                 ),
               ),
               const SizedBox(height: 50),
+              TextFieldWidget(
+                label: 'Current password',
+                controller: currentPasswordController,
+              ),
+              const SizedBox(height: 20),
               TextFieldWidget(
                 label: 'New password',
                 controller: newPasswordController,
@@ -103,14 +124,6 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                 text: 'Create',
                 onTap: () async {
                   await resetPassword();
-
-                  if (statusMessage == 'Password updated successfully!') {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const PasswordChangedView()),
-                    );
-                  }
                 },
               ),
               const SizedBox(height: 20),
@@ -118,7 +131,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                 textAlign: TextAlign.center,
                 statusMessage,
                 style: const TextStyle(color: Colors.red),
-              )
+              ),
             ],
           ),
         ),
