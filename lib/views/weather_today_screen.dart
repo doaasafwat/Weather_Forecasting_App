@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_forecasting_app/cubits/get_weather_cubit/get_weather_cubit.dart';
 import 'package:weather_forecasting_app/models/hour.dart';
 import 'package:weather_forecasting_app/models/weather_model.dart';
+import 'package:weather_forecasting_app/views/weather_forecast_screen.dart';
 import 'package:weather_forecasting_app/widgets/hourly_forecast_item.dart';
 import 'package:weather_forecasting_app/widgets/weather_icons.dart';
 import 'package:weather_forecasting_app/widgets/weather_stat.dart';
@@ -114,7 +117,20 @@ class WeatherTodayScreen extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () => Navigator.pushNamed(context, '/forecast'),
+                        onTap: () {
+                          context
+                              .read<GetWeatherCubit>()
+                              .getWeather(cityName: weatherModel.location.name);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => WeatherForecastScreen(
+                                cityName: weatherModel.location.name,
+                                weatherModel: weatherModel,
+                              ),
+                            ),
+                          );
+                        },
                         child: const Center(
                           child: Text(
                             "7 Days",
