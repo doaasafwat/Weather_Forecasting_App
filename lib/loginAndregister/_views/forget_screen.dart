@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_forecasting_app/loginAndregister/_views/login_screen.dart';
-import 'package:weather_forecasting_app/views/create_new_password.dart';
 
 class ForgetPage extends StatefulWidget {
   const ForgetPage({super.key});
@@ -14,7 +13,6 @@ class _ForgetPageState extends State<ForgetPage> {
   final _emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  // دالة إرسال رابط إعادة تعيين كلمة المرور
   Future<void> _sendPasswordResetEmail() async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(
@@ -23,13 +21,14 @@ class _ForgetPageState extends State<ForgetPage> {
 
       // إذا تم إرسال البريد بنجاح، انقل المستخدم إلى صفحة "Create New Password"
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Password reset link sent to email')),
+        const SnackBar(
+            content: Text('Check the email to reset password and login again')),
       );
 
       // التنقل إلى صفحة "Create New Password"
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const CreateNewPassword()),
+        MaterialPageRoute(builder: (context) => const LoginView()),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -102,7 +101,7 @@ class _ForgetPageState extends State<ForgetPage> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white, // لون النص في حقل الإدخال
                   ),
                 ),
