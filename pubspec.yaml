@@ -16,6 +16,7 @@
   flutter:
     sdk: flutter
   latlong2: ^0.9.1
+  intl: ^0.17.0
   cupertino_icons: ^1.0.6
   font_awesome_flutter: ^10.7.0
   dio: ^5.7.0

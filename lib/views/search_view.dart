@@ -16,7 +16,7 @@ class SearchView extends StatelessWidget {
       body:
           BlocBuilder<GetWeatherCubit, WeatherState>(builder: (context, state) {
         if (state is WeatherInitialState) {
-          return const SearchViewBody();
+          return  SearchViewBody();
         } else if (state is WeatherLoadedState) {
           return WeatherTodayScreen(
             weatherModel: state.weatherModel,

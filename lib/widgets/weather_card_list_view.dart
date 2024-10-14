@@ -1,54 +1,29 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:weather_forecasting_app/models/weather_model.dart';
 import 'package:weather_forecasting_app/widgets/weather_card_item.dart';
 
 class WeatherCardListView extends StatelessWidget {
-  const WeatherCardListView({super.key});
-  static const items = [
-    WeatherCard(
-      day: 'Today',
-      data: 'Mar 6',
-      condition: 'Sunny',
-      tempRange: '15-20℃',
-      aqi: 'AQI 67',
-    ),
-    WeatherCard(
-      day: 'Today',
-      data: 'Mar 6',
-      condition: 'Sunny',
-      tempRange: '15-20℃',
-      aqi: 'AQI 67',
-    ),
-    WeatherCard(
-      day: 'Today',
-      data: 'Mar 6',
-      condition: 'Sunny',
-      tempRange: '15-20℃',
-      aqi: 'AQI 67',
-    ),
-    WeatherCard(
-      day: 'Today',
-      data: 'Mar 6',
-      condition: 'Sunny',
-      tempRange: '15-20℃',
-      aqi: 'AQI 67',
-    ),
-    WeatherCard(
-      day: 'Today',
-      data: 'Mar 6',
-      condition: 'Sunny',
-      tempRange: '15-20℃',
-      aqi: 'AQI 67',
-    ),
-    WeatherCard(
-      day: 'Today',
-      data: 'Mar 6',
-      condition: 'Sunny',
-      tempRange: '15-20℃',
-      aqi: 'AQI 67',
-    ),
-  ];
+  const WeatherCardListView({super.key, required this.weatherModel, required this.isCelsius});
+
+  final WeatherModel weatherModel;
+  final bool isCelsius; 
+
   @override
   Widget build(BuildContext context) {
+    List<WeatherCard> items = weatherModel.forecast.map((forecastDay) {
+      return WeatherCard(
+        data: forecastDay.date,
+        condition: forecastDay.day.condition,
+        maxTemperature: forecastDay.day.maxTemperature, 
+        minTemperature: forecastDay.day.minTemperature, 
+        aqi: forecastDay.day.minTemperature.toString(),
+        iconUrl: forecastDay.iconUrl,
+        sunrise: forecastDay.sunrise,
+        sunset: forecastDay.sunset,
+        isCelsius: isCelsius, 
+      );
+    }).toList();
+
     return ListView.builder(
       itemCount: items.length,
       scrollDirection: Axis.horizontal,

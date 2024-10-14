@@ -32,11 +32,11 @@ class Oops extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
-               Text(
+              Text(
                 message,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 24,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,

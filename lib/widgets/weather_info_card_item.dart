@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class WeatherInfoCardItem extends StatelessWidget {
   const WeatherInfoCardItem({
@@ -8,6 +9,7 @@ class WeatherInfoCardItem extends StatelessWidget {
     required this.aqi,
     required this.temp,
     required this.time,
+    required this.image,
   });
 
   final String city;
@@ -15,18 +17,18 @@ class WeatherInfoCardItem extends StatelessWidget {
   final String aqi;
   final String temp;
   final String time;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 216,
-      width: 168,
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.grey,
-          width: 0.1,
+          color: Colors.grey.withOpacity(0.3),
+          width: 0.8,
         ),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(15),
+        color: const Color(0xff1D2837),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -42,9 +44,9 @@ class WeatherInfoCardItem extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Color(0xffFFFFFF)),
                 ),
-                const Expanded(child: SizedBox()),
+                const Spacer(),
                 Text(
-                  time,
+                  formatDate(time),
                   style: const TextStyle(
                     fontSize: 14,
                     color: Color(0xffFFFFFF),
@@ -56,9 +58,12 @@ class WeatherInfoCardItem extends StatelessWidget {
             Center(
               child: Column(
                 children: [
-                  Image.asset(
-                    'assets/images/Image (2).png',
+                  Image.network(
+                    'https:$image',
+                    height: 100,
+                    width: 100,
                   ),
+                  const SizedBox(height: 5),
                   Text(
                     condition,
                     style: const TextStyle(
@@ -69,30 +74,35 @@ class WeatherInfoCardItem extends StatelessWidget {
                 ],
               ),
             ),
-            const Expanded(child: SizedBox()),
+            const Spacer(),
             Row(
               children: [
                 Text(
-                  aqi,
+                  'AQI: $aqi',
                   style: const TextStyle(
                     fontSize: 14,
                     color: Color(0xffFFFFFF),
                   ),
                 ),
-                const Expanded(child: SizedBox()),
+                const Spacer(),
                 Text(
                   temp,
                   style: const TextStyle(
                     fontSize: 14,
+                    fontWeight: FontWeight.bold,
                     color: Color(0xffFFFFFF),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 10),
           ],
         ),
       ),
     );
+  }
+
+  String formatDate(String date) {
+    DateTime parsedDate = DateTime.parse(date);
+    return DateFormat('dd MMM').format(parsedDate);
   }
 }

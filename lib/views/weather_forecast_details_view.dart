@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:weather_forecasting_app/services/weather_service.dart';
 import 'package:weather_forecasting_app/widgets/weather_forecast_details_body.dart';
 
 class WeatherForecastDetailsView extends StatelessWidget {
@@ -6,6 +8,7 @@ class WeatherForecastDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const WeatherForecastDetailsBody();
+     final weatherService = WeatherService(Dio());
+    return  WeatherForecastDetailsBody(weatherService:weatherService ,);
   }
 }
