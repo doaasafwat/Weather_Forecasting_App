@@ -104,7 +104,7 @@ bool isCelsius = true;
                     return Center(child: Text('Error: ${snapshot.error}'));
                   } else if (snapshot.hasData) {
                     return WeatherCardListView(
-                      isCelsius: true,
+                     
                         weatherModel: snapshot.data!); 
                   } else {
                     return const Center(child: Text('No data found'));

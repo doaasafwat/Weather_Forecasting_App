@@ -1,12 +1,14 @@
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:weather_forecasting_app/widgets/temperature_unit_provider.dart';
 
 class WeatherCard extends StatelessWidget {
   final String data;
   final String condition;
   final num maxTemperature; 
   final num minTemperature;
-  final bool isCelsius; 
   final String aqi;
   final String iconUrl;
   final String sunrise;
@@ -21,11 +23,13 @@ class WeatherCard extends StatelessWidget {
     required this.iconUrl,
     required this.sunrise,
     required this.sunset,
-    required this.isCelsius, 
   });
 
   @override
   Widget build(BuildContext context) {
+
+    var temperatureNotifier = Provider.of<TemperatureUnitNotifier>(context);
+    
     return Container(
       width: 100,
       height: 156,
@@ -56,7 +60,7 @@ class WeatherCard extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          '${displayTemperature(maxTemperature)}° ${isCelsius ? 'C' : 'F'} / ${displayTemperature(minTemperature)}° ${isCelsius ? 'C' : 'F'}',
+          '${displayTemperature(maxTemperature, temperatureNotifier.isCelsius).toStringAsFixed(1)} ${temperatureNotifier.isCelsius ? '°C':'°F'}',
           style: const TextStyle(fontSize: 12, color: Colors.white),
         ),
         const SizedBox(height: 8),
@@ -68,7 +72,7 @@ class WeatherCard extends StatelessWidget {
     );
   }
 
-  num displayTemperature(num temp) {
+  num displayTemperature(num temp, bool isCelsius) {
     if (isCelsius) {
       return temp; 
     } else {

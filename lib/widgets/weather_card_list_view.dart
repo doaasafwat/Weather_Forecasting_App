@@ -3,10 +3,10 @@ import 'package:weather_forecasting_app/models/weather_model.dart';
 import 'package:weather_forecasting_app/widgets/weather_card_item.dart';
 
 class WeatherCardListView extends StatelessWidget {
-  const WeatherCardListView({super.key, required this.weatherModel, required this.isCelsius});
+  const WeatherCardListView({super.key, required this.weatherModel});
 
   final WeatherModel weatherModel;
-  final bool isCelsius; 
+
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,6 @@ class WeatherCardListView extends StatelessWidget {
         iconUrl: forecastDay.iconUrl,
         sunrise: forecastDay.sunrise,
         sunset: forecastDay.sunset,
-        isCelsius: isCelsius, 
       );
     }).toList();
 

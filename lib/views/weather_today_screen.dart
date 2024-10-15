@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecasting_app/cubits/get_weather_cubit/get_weather_cubit.dart';
 import 'package:weather_forecasting_app/models/hour.dart';
 import 'package:weather_forecasting_app/models/weather_model.dart';
+import 'package:weather_forecasting_app/views/search_view.dart';
 import 'package:weather_forecasting_app/views/weather_forecast_screen.dart';
 import 'package:weather_forecasting_app/widgets/hourly_forecast_item.dart';
 import 'package:weather_forecasting_app/widgets/weather_icons.dart';
@@ -27,7 +28,9 @@ class WeatherTodayScreen extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder:(context) => const SearchView(),));
+          },
         ),
         centerTitle: true,
         title: Row(

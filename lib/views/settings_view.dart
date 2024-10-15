@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; 
 import 'package:weather_forecasting_app/views/create_new_password.dart';
-
 import 'package:weather_forecasting_app/widgets/custom_list_tile.dart';
+import 'package:weather_forecasting_app/widgets/temperature_unit_provider.dart';
 
 class Setting extends StatefulWidget {
   const Setting({super.key});
@@ -12,19 +13,13 @@ class Setting extends StatefulWidget {
 
 class _SettingState extends State<Setting> {
   bool cellurData = true;
-  double displayTemperature(double temp) {
-    if (isCelsius) {
-      return temp;
-    } else {
-      return (temp * 9 / 5) + 32;
-    }
-  }
-
-  bool isCelsius = true;
-  bool isFahrenheit = false;
   bool resetIdentifier = false;
+
   @override
   Widget build(BuildContext context) {
+   
+    var temperatureNotifier = Provider.of<TemperatureUnitNotifier>(context);
+
     return Scaffold(
       backgroundColor: const Color(0xFF1D2837),
       appBar: AppBar(
@@ -103,28 +98,22 @@ class _SettingState extends State<Setting> {
                   ),
                   CheckboxListTile(
                     title: const Text(
-                      'celsius',
+                      'Celsius',
                       style: TextStyle(color: Colors.white),
                     ),
-                    value: isCelsius,
+                    value: temperatureNotifier.isCelsius,
                     onChanged: (newValue) {
-                      setState(() {
-                        isCelsius = newValue!;
-                        isFahrenheit = !newValue;
-                      });
+                      temperatureNotifier.toggleTemperatureUnit();
                     },
                   ),
                   CheckboxListTile(
                     title: const Text(
-                      'fahrenheit',
+                      'Fahrenheit',
                       style: TextStyle(color: Colors.white),
                     ),
-                    value: isFahrenheit,
+                    value: !temperatureNotifier.isCelsius,
                     onChanged: (newValue) {
-                      setState(() {
-                        isFahrenheit = newValue!;
-                        isCelsius = !newValue;
-                      });
+                      temperatureNotifier.toggleTemperatureUnit();
                     },
                   )
                 ],

@@ -23,14 +23,14 @@ class WeatherForecastScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
         centerTitle: true,
-        title: const Row(
+        title:  Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.location_pin, color: Colors.purpleAccent),
-            SizedBox(width: 5),
-            Text('New York',
-                style: TextStyle(color: Colors.white, fontSize: 18)),
-            Icon(Icons.arrow_drop_down, color: Colors.white),
+           const Icon(Icons.location_pin, color: Colors.purpleAccent),
+           const SizedBox(width: 5),
+            Text(cityName,
+                style:const TextStyle(color: Colors.white, fontSize: 18)),
+           const Icon(Icons.arrow_drop_down, color: Colors.white),
           ],
         ),
       ),
