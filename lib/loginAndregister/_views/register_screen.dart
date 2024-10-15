@@ -24,9 +24,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   bool isPasswordVisible = false;
+  bool isConfirmPasswordVisible = false;
   String statusMessage = '';
 
   Future<void> registerUser() async {
+    if (usernameController.text.isEmpty) {
+      setState(() {
+        statusMessage = "Username is required";
+      });
+      return;
+    }
     if (passwordController.text != confirmPasswordController.text) {
       setState(() {
         statusMessage = "Passwords do not match";
@@ -122,11 +129,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     hintText: 'Confirm Password',
                     isPassword: true,
                     screenHeight: screenHeight,
-                    isPasswordVisible: isPasswordVisible,
+                    isPasswordVisible: isConfirmPasswordVisible,
                     onTogglePasswordVisibility: () {
                       setState(() {
-                        isPasswordVisible =
-                            !isPasswordVisible; // Toggle visibility
+                        isConfirmPasswordVisible =
+                            !isConfirmPasswordVisible; // Toggle visibility
                       });
                     },
                   ),
