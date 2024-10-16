@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecasting_app/cubits/get_weather_cubit/get_weather_cubit.dart';
@@ -31,7 +30,9 @@ class WeatherTodayScreen extends StatelessWidget {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const  SearchView(),));
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => const SearchView()),
+              );
             },
           ),
           centerTitle: true,
@@ -121,9 +122,8 @@ class WeatherTodayScreen extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            context
-                                .read<GetWeatherCubit>()
-                                .getWeather(cityName: weatherModel.location.name);
+                            context.read<GetWeatherCubit>().getWeather(
+                                cityName: weatherModel.location.name);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -149,7 +149,8 @@ class WeatherTodayScreen extends StatelessWidget {
                     const SizedBox(height: 22),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: weatherModel.forecast[0].hour.take(5).map((hour) {
+                      children:
+                          weatherModel.forecast[0].hour.take(5).map((hour) {
                         String time = hour.time.contains(' ')
                             ? hour.time.split(' ')[1]
                             : hour.time;
