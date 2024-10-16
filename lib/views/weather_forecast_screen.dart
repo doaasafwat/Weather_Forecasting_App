@@ -41,7 +41,7 @@ class WeatherForecastScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Current weather section
+              
                 Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Row(
@@ -93,7 +93,7 @@ class WeatherForecastScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 20),
-                // 7-Day Forecast Heading
+       
                 const Text(
                   '7-Days Forecast',
                   style: TextStyle(
@@ -102,7 +102,7 @@ class WeatherForecastScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 22),
-                // List of forecast items
+           
                 Expanded(
                   child: ListView.builder(
                     itemCount: weatherModel.forecast.length,
@@ -111,7 +111,7 @@ class WeatherForecastScreen extends StatelessWidget {
                       return ForecastItem(
                         day: day.date,
                         icon: Icons
-                            .wb_sunny, // You can map icons based on condition
+                            .wb_sunny, 
                         high: day.day.maxTemperature.toInt(),
                         low: day.day.minTemperature.toInt(),
                       );

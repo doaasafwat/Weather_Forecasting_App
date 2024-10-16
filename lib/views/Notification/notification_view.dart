@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_forecasting_app/views/Notification/notification_view_body.dart';
-import 'package:weather_forecasting_app/views/search_view.dart';
+
 
 class NotificationView extends StatelessWidget {
   const NotificationView({super.key});
@@ -31,12 +31,7 @@ class NotificationView extends StatelessWidget {
             height: 40,
             child: IconButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SearchView(),
-                  ),
-                );
+                Navigator.pop(context);
               },
               icon: const Icon(
                 Icons.arrow_back_ios_rounded,

@@ -32,6 +32,7 @@ class CustomSearchTextField extends StatelessWidget {
                 context
                     .read<GetWeatherCubit>()
                     .getWeather(cityName: textController.text.trim());
+
               }
             },
             icon: const Icon(

@@ -18,14 +18,23 @@ class SearchView extends StatelessWidget {
         builder: (context, state) {
           if (state is WeatherInitialState) {
             return SearchViewBody();
-          } else if (state is WeatherLoadedState && isfirst == true) {
-            return SearchViewBody();
           } else if (state is WeatherLoadedState) {
-            isfirst = true; 
-            return WeatherTodayScreen(
-              weatherModel: state.weatherModel,
-              hour: state.weatherModel.forecast[0].hour[0],
-            );
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => WeatherTodayScreen(
+                    weatherModel: state.weatherModel,
+                    hour: state.weatherModel.forecast[0].hour[0],
+                  ),
+                ),
+              ).then((shouldReturnToSearch) {
+                if (shouldReturnToSearch == true) {
+              
+                }
+              });
+            });
+            return SearchViewBody(); 
           } else if (state is WeatherFailureState) {
             return Oops(message: state.errorMessage);
           } else {

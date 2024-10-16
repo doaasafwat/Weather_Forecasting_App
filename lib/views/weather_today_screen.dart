@@ -1,28 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_forecasting_app/cubits/get_weather_cubit/get_weather_cubit.dart';
 import 'package:weather_forecasting_app/models/hour.dart';
 import 'package:weather_forecasting_app/models/weather_model.dart';
-import 'package:weather_forecasting_app/views/search_view.dart';
 import 'package:weather_forecasting_app/views/weather_forecast_screen.dart';
 import 'package:weather_forecasting_app/widgets/hourly_forecast_item.dart';
 import 'package:weather_forecasting_app/widgets/weather_icons.dart';
 import 'package:weather_forecasting_app/widgets/weather_stat.dart';
 
 class WeatherTodayScreen extends StatelessWidget {
-  const WeatherTodayScreen({
-    super.key,
-    required this.weatherModel,
-    required this.hour,
-  });
-
   final WeatherModel weatherModel;
   final Hour hour;
 
+  const WeatherTodayScreen({super.key, required this.weatherModel, required this.hour});
+
   @override
   Widget build(BuildContext context) {
-    try {
-      return Scaffold(
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pop(context, true); 
+        return false; 
+      },
+      child: Scaffold(
         backgroundColor: const Color(0xFF1D2837),
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -30,9 +27,7 @@ class WeatherTodayScreen extends StatelessWidget {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const SearchView()),
-              );
+              Navigator.pop(context, true); 
             },
           ),
           centerTitle: true,
@@ -52,7 +47,8 @@ class WeatherTodayScreen extends StatelessWidget {
             ],
           ),
         ),
-        body: Padding(
+        body:
+        Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,30 +116,29 @@ class WeatherTodayScreen extends StatelessWidget {
                             fontSize: 22,
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            context.read<GetWeatherCubit>().getWeather(
-                                cityName: weatherModel.location.name);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => WeatherForecastScreen(
-                                  cityName: weatherModel.location.name,
-                                  weatherModel: weatherModel,
-                                ),
-                              ),
-                            );
-                          },
-                          child: const Center(
-                            child: Text(
-                              "7 Days",
-                              style: TextStyle(
-                                color: Colors.purpleAccent,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
-                        ),
+                       GestureDetector(
+  onTap: () async {
+    
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => WeatherForecastScreen(
+          cityName: weatherModel.location.name,
+          weatherModel: weatherModel,
+        ),
+      ),
+    );
+  },
+  child: const Center(
+    child: Text(
+      "7 Days",
+      style: TextStyle(
+        color: Colors.purpleAccent,
+        fontSize: 20,
+      ),
+    ),
+  ),
+),
                       ],
                     ),
                     const SizedBox(height: 22),
@@ -168,9 +163,7 @@ class WeatherTodayScreen extends StatelessWidget {
             ],
           ),
         ),
-      );
-    } catch (e) {
-      return Center(child: Text('Error: ${e.toString()}'));
-    }
+      ));
+            
   }
 }
