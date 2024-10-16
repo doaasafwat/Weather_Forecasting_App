@@ -40,15 +40,36 @@ class _LoginViewBodyState extends State<LoginViewBody> {
     } on FirebaseAuthException catch (e) {
       setState(() {
         if (e.code == 'wrong-password') {
-          statusMessage = 'The password you entered is incorrect.';
+          // statusMessage = 'The password you entered is incorrect.';
+           ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('The password you entered is incorrect.')),
+      );
         } else if (e.code == 'user-not-found') {
-          statusMessage = 'Email or password is incorrect.';
+          // statusMessage = 'Email or password is incorrect.';
+           ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Email or password is incorrect.')),
+      );
+
         } else if (e.code == 'invalid-email') {
-          statusMessage = 'Please enter valid email address.';
+          // statusMessage = 'Please enter valid email address.';
+           ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Please enter valid email address.')),
+      );
         } else if (e.code == 'invalid-credential') {
-          statusMessage = 'Email or password is incorrect.';
+          // statusMessage = 'Email or password is incorrect.';
+           ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Email or password is incorrect.')),
+      );
         } else {
-          statusMessage = 'Login failed. Please try again.';
+          // statusMessage = 'Login failed. Please try again.';
+           ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Login failed. Please try again.')),
+      );
         }
       });
     }
@@ -123,12 +144,12 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   buildRegisterText(context),
                   SizedBox(height: screenHeight * 0.02),
                   // Display login error or status message
-                  if (statusMessage.isNotEmpty)
-                    Text(
-                      statusMessage,
-                      style: const TextStyle(color: Colors.redAccent),
-                      textAlign: TextAlign.center,
-                    ),
+                  // if (statusMessage.isNotEmpty)
+                  //   Text(
+                  //     statusMessage,
+                  //     style: const TextStyle(color: Colors.redAccent),
+                  //     textAlign: TextAlign.center,
+                  //   ),
                 ],
               ),
             ),

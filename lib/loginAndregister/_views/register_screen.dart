@@ -30,13 +30,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Future<void> registerUser() async {
     if (usernameController.text.isEmpty) {
       setState(() {
-        statusMessage = "Username is required";
+        // statusMessage = "Username is required";
+        ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Username is required')),
+      );
       });
       return;
     }
     if (passwordController.text != confirmPasswordController.text) {
       setState(() {
-        statusMessage = "Passwords do not match";
+        // statusMessage = "Passwords do not match";
+        ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Passwords do not match')),
+      );
       });
       return;
     }
@@ -62,7 +70,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
       });
     } on FirebaseAuthException catch (e) {
       setState(() {
-        statusMessage = e.message ?? "Registration failed. Try again.";
+        // statusMessage = e.message ?? "Registration failed. Try again.";
+        ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text(e.message ?? "Registration failed. Try again.")),
+      );
       });
     }
   }
@@ -154,11 +166,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(height: screenHeight * 0.05),
                   buildLoginText(context),
                   SizedBox(height: screenHeight * 0.02),
-                  Text(
-                    statusMessage,
-                    style: const TextStyle(color: Colors.redAccent),
-                    textAlign: TextAlign.center,
-                  ),
+                  // Text(
+                  //   statusMessage,
+                  //   style: const TextStyle(color: Colors.redAccent),
+                  //   textAlign: TextAlign.center,
+                  // ),
                 ],
               ),
             ),
