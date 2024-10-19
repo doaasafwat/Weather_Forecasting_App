@@ -23,14 +23,14 @@ class WeatherForecastScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
         centerTitle: true,
-        title:  Row(
+        title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-           const Icon(Icons.location_pin, color: Colors.purpleAccent),
-           const SizedBox(width: 5),
+            const Icon(Icons.location_pin, color: Colors.purpleAccent),
+            const SizedBox(width: 5),
             Text(cityName,
-                style:const TextStyle(color: Colors.white, fontSize: 18)),
-           const Icon(Icons.arrow_drop_down, color: Colors.white),
+                style: const TextStyle(color: Colors.white, fontSize: 18)),
+            const Icon(Icons.arrow_drop_down, color: Colors.white),
           ],
         ),
       ),
@@ -41,7 +41,6 @@ class WeatherForecastScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-              
                 Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Row(
@@ -93,16 +92,14 @@ class WeatherForecastScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 20),
-       
                 const Text(
-                  '7-Days Forecast',
+                  '3-Days Forecast',
                   style: TextStyle(
                       color: Colors.white70,
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 22),
-           
                 Expanded(
                   child: ListView.builder(
                     itemCount: weatherModel.forecast.length,
@@ -110,8 +107,7 @@ class WeatherForecastScreen extends StatelessWidget {
                       final day = weatherModel.forecast[index];
                       return ForecastItem(
                         day: day.date,
-                        icon: Icons
-                            .wb_sunny, 
+                        icon: Icons.wb_sunny,
                         high: day.day.maxTemperature.toInt(),
                         low: day.day.minTemperature.toInt(),
                       );

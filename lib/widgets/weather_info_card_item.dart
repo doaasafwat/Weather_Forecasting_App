@@ -67,7 +67,8 @@ class WeatherInfoCardItem extends StatelessWidget {
                   Text(
                     condition,
                     style: const TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                       color: Color(0xffFFFFFF),
                     ),
                   ),
