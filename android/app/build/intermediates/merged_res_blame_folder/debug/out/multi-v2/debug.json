@@ -1,0 +1,62 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.foire.weather_forecasting_app-merged_res-5:/values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "D:\\Flutter Projects\\weather_app\\Weather_Forecasting_App\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "176,832",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "483,998"
+                    },
+                    "to": {
+                        "startLines": "8,12",
+                        "startColumns": "4,4",
+                        "startOffsets": "647,828",
+                        "endLines": "11,14",
+                        "endColumns": "12,12",
+                        "endOffsets": "823,992"
+                    }
+                },
+                {
+                    "source": "D:\\Flutter Projects\\weather_app\\Weather_Forecasting_App\\android\\app\\build\\generated\\res\\processDebugGoogleServices\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,137,241,350,470,570",
+                        "endColumns": "81,103,108,119,99,76",
+                        "endOffsets": "132,236,345,465,565,642"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "com.foire.weather_forecasting_app-merged_res-5:/values-night-v8_values-night-v8.arsc.flat",
+            "map": [
+                {
+                    "source": "D:\\Flutter Projects\\weather_app\\Weather_Forecasting_App\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "175,831",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "482,997"
+                    },
+                    "to": {
+                        "startLines": "2,6",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,236",
+                        "endLines": "5,8",
+                        "endColumns": "12,12",
+                        "endOffsets": "231,400"
+                    }
+                }
+            ]
+        }
+    ]
+}

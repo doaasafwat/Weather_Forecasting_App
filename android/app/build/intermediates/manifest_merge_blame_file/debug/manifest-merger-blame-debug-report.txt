@@ -1,0 +1,88 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.foire.weather_forecasting_app"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+9        android:targetSdkVersion="34" />
+10    <!--
+11         The INTERNET permission is required for development. Specifically,
+12         the Flutter tool needs it to communicate with the running application
+13         to allow setting breakpoints, to provide hot reload, etc.
+14    -->
+15    <uses-permission android:name="android.permission.INTERNET" />
+15-->D:\Flutter Projects\weather_app\Weather_Forecasting_App\android\app\src\debug\AndroidManifest.xml:6:5-66
+15-->D:\Flutter Projects\weather_app\Weather_Forecasting_App\android\app\src\debug\AndroidManifest.xml:6:22-64
+16    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+16-->D:\Flutter Projects\weather_app\Weather_Forecasting_App\android\app\src\main\AndroidManifest.xml:2:5-84
+16-->D:\Flutter Projects\weather_app\Weather_Forecasting_App\android\app\src\main\AndroidManifest.xml:2:22-82
+17    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+17-->D:\Flutter Projects\weather_app\Weather_Forecasting_App\android\app\src\main\AndroidManifest.xml:3:5-78
+17-->D:\Flutter Projects\weather_app\Weather_Forecasting_App\android\app\src\main\AndroidManifest.xml:3:22-76
+18    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+18-->D:\Flutter Projects\weather_app\Weather_Forecasting_App\android\app\src\main\AndroidManifest.xml:4:5-80
+18-->D:\Flutter Projects\weather_app\Weather_Forecasting_App\android\app\src\main\AndroidManifest.xml:4:22-78
+19    <!--
+20 Required to query activities that can process text, see:
+21         https://developer.android.com/training/package-visibility?hl=en and
+22         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
+23
+24         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin.
+25    -->
+26    <queries>
+26-->D:\Flutter Projects\weather_app\Weather_Forecasting_App\android\app\src\main\AndroidManifest.xml:42:5-47:15
+27        <intent>
+27-->D:\Flutter Projects\weather_app\Weather_Forecasting_App\android\app\src\main\AndroidManifest.xml:43:9-46:18
+28            <action android:name="android.intent.action.PROCESS_TEXT" />
+28-->D:\Flutter Projects\weather_app\Weather_Forecasting_App\android\app\src\main\AndroidManifest.xml:44:13-72
+28-->D:\Flutter Projects\weather_app\Weather_Forecasting_App\android\app\src\main\AndroidManifest.xml:44:21-70
+29
+30            <data android:mimeType="text/plain" />
+30-->D:\Flutter Projects\weather_app\Weather_Forecasting_App\android\app\src\main\AndroidManifest.xml:45:13-50
+30-->D:\Flutter Projects\weather_app\Weather_Forecasting_App\android\app\src\main\AndroidManifest.xml:45:19-48
+31        </intent>
+32    </queries>
+33
+34    <application
+35        android:name="android.app.Application"
+36        android:debuggable="true"
+37        android:extractNativeLibs="false"
+38        android:icon="@mipmap/ic_launcher"
+39        android:label="weather_forecasting_app" >
+40        <activity
+41            android:name="com.foire.weather_forecasting_app.MainActivity"
+42            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+43            android:exported="true"
+44            android:hardwareAccelerated="true"
+45            android:launchMode="singleTop"
+46            android:theme="@style/LaunchTheme"
+47            android:windowSoftInputMode="adjustResize" >
+48
+49            <!--
+50                 Specifies an Android theme to apply to this Activity as soon as
+51                 the Android process has started. This theme is visible to the user
+52                 while the Flutter UI initializes. After that, this theme continues
+53                 to determine the Window background behind the Flutter UI.
+54            -->
+55            <meta-data
+56                android:name="io.flutter.embedding.android.NormalTheme"
+57                android:resource="@style/NormalTheme" />
+58
+59            <intent-filter>
+60                <action android:name="android.intent.action.MAIN" />
+61
+62                <category android:name="android.intent.category.LAUNCHER" />
+63            </intent-filter>
+64        </activity>
+65        <!--
+66             Don't delete the meta-data below.
+67             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+68        -->
+69        <meta-data
+70            android:name="flutterEmbedding"
+71            android:value="2" />
+72    </application>
+73
+74</manifest>

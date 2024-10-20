@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">415694288684</string>
+    <string name="google_api_key" translatable="false">AIzaSyBF2axobwU3pCHvo10OstvdmtCu-XzI6z8</string>
+    <string name="google_app_id" translatable="false">1:415694288684:android:7610c894d2516cd7929e89</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBF2axobwU3pCHvo10OstvdmtCu-XzI6z8</string>
+    <string name="google_storage_bucket" translatable="false">weatherapp-efe44.appspot.com</string>
+    <string name="project_id" translatable="false">weatherapp-efe44</string>
+    <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        
+        <item name="android:windowBackground">@drawable/launch_background</item>
+    </style>
+    <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:windowBackground">?android:colorBackground</item>
+    </style>
+</resources>

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart'; 
+import 'package:provider/provider.dart';
 import 'package:weather_forecasting_app/views/create_new_password.dart';
 import 'package:weather_forecasting_app/widgets/custom_list_tile.dart';
 import 'package:weather_forecasting_app/widgets/temperature_unit_provider.dart';
@@ -17,7 +17,6 @@ class _SettingState extends State<Setting> {
 
   @override
   Widget build(BuildContext context) {
-   
     var temperatureNotifier = Provider.of<TemperatureUnitNotifier>(context);
 
     return Scaffold(

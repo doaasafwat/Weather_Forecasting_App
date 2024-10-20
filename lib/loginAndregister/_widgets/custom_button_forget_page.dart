@@ -16,7 +16,7 @@ class CustomButtonForgetPage extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: TextStyle(fontSize: 18, color: Colors.white),
+        style: const TextStyle(fontSize: 18, color: Colors.white),
       ),
     );
   }

@@ -14,7 +14,7 @@ class WeatherCard extends StatelessWidget {
   final String sunrise;
   final String sunset;
 
-  WeatherCard({
+  const WeatherCard({super.key, 
     required this.data,
     required this.condition,
     required this.maxTemperature,
@@ -65,7 +65,7 @@ class WeatherCard extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          'AQI ${aqi}',
+          'AQI $aqi',
           style: const TextStyle(fontSize: 12, color: Colors.white),
         ),
       ]),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecasting_app/cubits/get_weather_cubit/get_weather_cubit.dart';
 import 'package:weather_forecasting_app/cubits/get_weather_cubit/get_weather_states.dart';
@@ -18,7 +17,7 @@ class SearchView extends StatelessWidget {
         builder: (context, state) {
           if (state is WeatherInitialState) {
             return SearchViewBody();
-          } else if (state is WeatherLoadedState) {
+          } else if (state is LoadedWeatherState) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               Navigator.push(
                 context,
@@ -35,8 +34,8 @@ class SearchView extends StatelessWidget {
               });
             });
             return SearchViewBody(); 
-          } else if (state is WeatherFailureState) {
-            return Oops(message: state.errorMessage);
+          } else if (state is FailureWeatherState) {
+            return Oops(message: state.error);
           } else {
             return const Center(child: CircularProgressIndicator());
           }
