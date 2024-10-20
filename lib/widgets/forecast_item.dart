@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import 'package:weather_forecasting_app/widgets/temperature_unit_provider.dart';
 class ForecastItem extends StatelessWidget {
   final String day;
   final IconData icon;
@@ -16,6 +17,7 @@ class ForecastItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     var temperatureNotifier = Provider.of<TemperatureUnitNotifier>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 14.0),
       child: Row(
@@ -43,7 +45,7 @@ class ForecastItem extends StatelessWidget {
           Column(
             children: [
               Text(
-                '$high°',
+                 '${displayTemperature(high, temperatureNotifier.isCelsius).toStringAsFixed(1)} ${temperatureNotifier.isCelsius ? '°C':'°F'}',
                 style: const TextStyle(color: Colors.white, fontSize: 18),
               ),
             ],
@@ -51,7 +53,7 @@ class ForecastItem extends StatelessWidget {
           Column(
             children: [
               Text(
-                '$low°',
+                '${displayTemperature(low, temperatureNotifier.isCelsius).toStringAsFixed(1)} ${temperatureNotifier.isCelsius ? '°C':'°F'}',
                 style: const TextStyle(color: Colors.white70, fontSize: 18),
               ),
             ],
@@ -59,5 +61,12 @@ class ForecastItem extends StatelessWidget {
         ],
       ),
     );
+  }
+      num displayTemperature(num temp, bool isCelsius) {
+    if (isCelsius) {
+      return temp; 
+    } else {
+      return (temp * 9 / 5) + 32; 
+    }
   }
 }

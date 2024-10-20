@@ -3,8 +3,10 @@ import 'package:weather_forecasting_app/models/hour.dart';
 import 'package:weather_forecasting_app/models/weather_model.dart';
 import 'package:weather_forecasting_app/views/weather_forecast_screen.dart';
 import 'package:weather_forecasting_app/widgets/hourly_forecast_item.dart';
+import 'package:weather_forecasting_app/widgets/temperature_unit_provider.dart';
 import 'package:weather_forecasting_app/widgets/weather_icons.dart';
 import 'package:weather_forecasting_app/widgets/weather_stat.dart';
+import 'package:provider/provider.dart';
 
 class WeatherTodayScreen extends StatelessWidget {
   final WeatherModel weatherModel;
@@ -15,6 +17,7 @@ class WeatherTodayScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var temperatureNotifier = Provider.of<TemperatureUnitNotifier>(context);
     return WillPopScope(
         onWillPop: () async {
           Navigator.pop(context, true);
@@ -71,7 +74,7 @@ class WeatherTodayScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${weatherModel.current.temperature}°',
+                        '${displayTemperature(weatherModel.current.temperature, temperatureNotifier.isCelsius).toStringAsFixed(1)} ${temperatureNotifier.isCelsius ? '°C' : '°F'}',
                         style: const TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
@@ -151,7 +154,8 @@ class WeatherTodayScreen extends StatelessWidget {
 
                           return HourlyForecastItem(
                             time: time,
-                            temp: '${hour.temperature}°',
+                            temp:
+                                '${displayTemperature(hour.temperature, temperatureNotifier.isCelsius).toStringAsFixed(1)} ${temperatureNotifier.isCelsius ? '°' : '°'}',
                             icon: getWeatherIcon(hour.condition),
                           );
                         }).toList(),
@@ -163,5 +167,13 @@ class WeatherTodayScreen extends StatelessWidget {
             ),
           ),
         ));
+  }
+
+  num displayTemperature(num temp, bool isCelsius) {
+    if (isCelsius) {
+      return temp;
+    } else {
+      return (temp * 9 / 5) + 32;
+    }
   }
 }
