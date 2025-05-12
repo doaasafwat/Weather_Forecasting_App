@@ -40,9 +40,10 @@ class HeaderSearchView extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const CircularProgressIndicator();
                 } else if (snapshot.hasError) {
+                  print("Firestore error: ${snapshot.error}");
                   return const Text('Error',
                       style: TextStyle(color: Colors.red));
-                } else if (snapshot.hasData) {
+                } else if (snapshot.hasData && snapshot.data!.exists) {
                   var userData = snapshot.data!.data() as Map<String, dynamic>?;
                   String username = userData?['username'] ?? 'User';
 

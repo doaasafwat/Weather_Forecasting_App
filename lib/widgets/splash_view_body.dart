@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class SplashViewBody extends StatelessWidget {
@@ -17,7 +16,27 @@ class SplashViewBody extends StatelessWidget {
         builder: (context, child) {
           return Transform.translate(
             offset: Offset(0, _animation.value),
-            child: Image.asset('assets/images/Moon and rain at night.png'),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 50,
+                ),
+                Image.asset('assets/images/Moon and rain at night.png'),
+                // const SizedBox(
+                //   height: 54,
+                // ),
+                const Text(
+                  "Weatherly",
+                  style: const TextStyle(
+                    fontSize: 50,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
           );
         },
       ),

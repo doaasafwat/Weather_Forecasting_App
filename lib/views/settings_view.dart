@@ -1,5 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_forecasting_app/views/about_view.dart';
 import 'package:weather_forecasting_app/views/create_new_password.dart';
 import 'package:weather_forecasting_app/widgets/custom_list_tile.dart';
 import 'package:weather_forecasting_app/widgets/temperature_unit_provider.dart';
@@ -132,6 +135,18 @@ class _SettingState extends State<Setting> {
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const AboutView();
+                  }));
+                },
+                child: CustomListTileWidget(
+                    icon: Icons.info_outline_rounded,
+                    iconBackgroundColor: Colors.transparent,
+                    title: 'About',
+                    trailingTitle: ''),
               ),
             ],
           ),
